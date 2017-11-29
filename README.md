@@ -1,7 +1,6 @@
-# ballCollectorRobot
-[![Build Status](https://travis-ci.org/ytlei/ballCollectorRobot.svg?branch=master)](https://travis-ci.org/ytlei/ballCollectorRobot)
-Ball Collector Robot project
+# ballCollectorRobot[![Build Status](https://travis-ci.org/ytlei/ballCollectorRobot.svg?branch=master)](https://travis-ci.org/ytlei/ballCollectorRobot)
 
+Ball Collector Robot project
 
 ## Overview
 build a simulation of the ball collector robot on ROS. It will be built with simple differential drive(turtlebot like) robot in ROS. The ball collector robot can find the nearest ball and goes to the ball and push them back to the corner for users to collect easily.
