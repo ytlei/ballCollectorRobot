@@ -14,8 +14,8 @@ Tools may include Gazebo Simulator, Turtlebot module, ROS, and RVIZ for visualiz
 Yi-ting Lei
 UMD Masters student in Robotics
 
-## Link to AIP Sheet
-[Iterative Process](https://docs.google.com/a/umd.edu/spreadsheets/d/1lzo7GK30SF71DnFegieKbuoOMx1Z_jcZFoYa5Z1Lw1A/edit?usp=sharing)
+## Link to Backlog Sheet
+[Product backlog](https://docs.google.com/a/umd.edu/spreadsheets/d/1lzo7GK30SF71DnFegieKbuoOMx1Z_jcZFoYa5Z1Lw1A/edit?usp=sharing)
 
 ## Dependencies
  * ROS Kinetic
