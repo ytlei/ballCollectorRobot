@@ -27,11 +27,12 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
+#include "../include/ballCollectorRobot/ballPushingPlanner.h"
+
 #include "ros/ros.h"
 #include <math.h>
 #include <exception>
 #include <vector>
-#include "ballCollectorRobot/push_planner.h"
 
 ballPushingPlanner::ballPushingPlanner(ros::NodeHandle nh) {
 	n = nh;
