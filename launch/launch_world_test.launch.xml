@@ -1,0 +1,25 @@
+<launch>
+
+  <arg name="record_bag" default="0" />
+  <arg name="include_gazebo" default="0" />
+
+  <group if="$(arg include_gazebo)">
+    <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+       <arg name="world_file" value="$(find ball_collector_robot)/worlds/test_world_balls.world.xml" />
+    </include>
+  </group>
+
+  <!-- Odom Node -->
+  <node pkg="ball_collector_robot" type="odom_tracker" name="odom_tracker" output="screen" />
+  <!-- Planner Node -->
+  <node pkg="ball_collector_robot" type="ball_pushing_planner" name="ball_pushing_planner" output="screen" />
+  <!-- Executor Node -->
+  <node pkg="ball_collector_robot" type="ball_collector" name="ball_collector" output="screen" />
+
+  <!-- rosbag -->
+  <group if="$(arg record_bag)">
+    <node pkg="rosbag" type="record" args="-a -O turtlebot_pushing_planner.bag -j -x '/camera.*'"
+      name="rosbag" />
+  </group>
+
+</launch>
