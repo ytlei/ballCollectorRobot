@@ -1,7 +1,7 @@
 /**
  * @file
  * @author Yiting Lei <ytlei@umd.edu>
- * @brief unit test for push executor
+ * @brief unit test for ball collector
  * @copyright BSD License
  * Copyright (c) 2017 Yiting Lei
  * All rights reserved.
@@ -36,36 +36,38 @@
 namespace {
 
 // The fixture for testing class PushExecutor.
-class BallCollectorTest : public ::testing::Test {
- protected:
+class BallCollectorTest: public ::testing::Test {
+protected:
 	BallCollectorTest() {
-    n.reset(new ros::NodeHandle);
-    setStateClient = n->serviceClient<ball_collector_robot::SetPushExecutorState>("set_executor_state");
-    // set active
-    ball_collector_robot::SetPushExecutorState srv;
-    srv.request.state = ball_collector_robot::SetPushExecutorState::Request::PUSHING;
-    setStateClient.call(srv);
-  }
+		n.reset(new ros::NodeHandle);
+		setStateClient = n->serviceClient
+				< ball_collector_robot::SetPushExecutorState
+				> ("set_executor_state");
+		// set active
+		ball_collector_robot::SetPushExecutorState srv;
+		srv.request.state =
+				ball_collector_robot::SetPushExecutorState::Request::PUSHING;
+		setStateClient.call(srv);
+	}
 
-  virtual ~BallCollectorTest() {
-    // You can do clean-up work that doesn't throw exceptions here.
-  }
+	virtual ~BallCollectorTest() {
+		// You can do clean-up work that doesn't throw exceptions here.
+	}
 
-  // Objects declared here can be used by all tests in the test cases.
-  std::shared_ptr<ros::NodeHandle> n;
-  ros::ServiceClient setStateClient;
+	// Objects declared here can be used by all tests in the test cases.
+	std::shared_ptr<ros::NodeHandle> n;
+	ros::ServiceClient setStateClient;
 };
 }  // namespace
 
-
 TEST_F(BallCollectorTest, servicesExist) {
-  bool addTargetExists(setStateClient.waitForExistence(ros::Duration(1)));
-  EXPECT_TRUE(addTargetExists);
+	bool addTargetExists(setStateClient.waitForExistence(ros::Duration(1)));
+	EXPECT_TRUE(addTargetExists);
 }
 
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "ball_collector_tests");
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+	ros::init(argc, argv, "ball_collector_tests");
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
 }
 
