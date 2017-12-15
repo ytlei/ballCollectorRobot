@@ -45,10 +45,10 @@ ballPushingPlanner::ballPushingPlanner(ros::NodeHandle nh) {
 			&ballPushingPlanner::getPushPlan, this);
 	clearAllService = n.advertiseService("clear_push_planner",
 			&ballPushingPlanner::clearAll, this);
-	// initialize jail
-	n.param<double>("jail_x", jail.x, 2.0);
-	n.param<double>("jail_y", jail.y, 0.0);
-	n.param<double>("jail_z", jail.z, 0.0);
+	// initialize corner
+	n.param<double>("corner_x", corner.x, 4.5);
+	n.param<double>("corner_y", corner.y, 4.5);
+	n.param<double>("corner_z", corner.z, 0.0);
 
 	// get initial offset
 	n.param<double>("offset", offset, 0.25);
@@ -58,8 +58,8 @@ ballPushingPlanner::ballPushingPlanner(ros::NodeHandle nh) {
 		minimumDistance = offset_dist;
 	}
 	ROS_INFO_STREAM(
-			"Jail Coordinates: (" << jail.x << "," << jail.y << "," << jail.z
-					<< ")");
+			"corner Coordinates: (" << corner.x << "," << corner.y << ","
+					<< corner.z << ")");
 }
 
 ballPushingPlanner::~ballPushingPlanner() {
@@ -91,12 +91,12 @@ bool ballPushingPlanner::addTarget(ballCollectorRobot::NewTargetRequest &req,
 	ROS_INFO_STREAM(
 			"Request to add target at centroid: (" << req.centroid.x << ", "
 					<< req.centroid.y << ")");
-	// is it already in jail?
-	double dist = distance(req.centroid, jail);
+	// is it already in corner?
+	double dist = distance(req.centroid, corner);
 	if (dist < minimumDistance) {
 		ROS_WARN_STREAM(
 				"Target at (" << req.centroid.x << ", " << req.centroid.y
-						<< ") " << dist << " from jail, min dist is "
+						<< ") " << dist << " from corner, min dist is "
 						<< minimumDistance);
 		return false;
 	}
@@ -119,15 +119,15 @@ bool ballPushingPlanner::addTarget(ballCollectorRobot::NewTargetRequest &req,
 bool ballPushingPlanner::updateTarget(
 		ballCollectorRobot::UpdateTargetRequest &req,
 		ballCollectorRobot::UpdateTargetResponse &resp) {
-	if (req.action == ballCollectorRobot::UpdateTarget::Request::JAILED) {
+	if (req.action == ballCollectorRobot::UpdateTarget::Request::cornerED) {
 		for (std::vector<ballCollectorRobot::PushPlan>::iterator it =
 				plans.begin(); it != plans.end(); ++it) {
 			ballCollectorRobot::PushPlan &plan = *it;
 			if (plan.target.id == req.target.id) {
 				ROS_INFO_STREAM(
 						"Setting Target with ID: " << plan.target.id
-								<< " To JAILED");
-				plan.jailed = true;
+								<< " To cornerED");
+				plan.cornered = true;
 				break;
 			}
 		}
@@ -159,13 +159,13 @@ bool ballPushingPlanner::getPushPlan(
 		double shortestDistance = 1000000;
 		for (ballCollectorRobot::PushPlan plan : plans) {
 			ROS_INFO_STREAM(
-					"Plan: " << plan.target.id << ", Jailed: "
-							<< (plan.jailed == true));
-			// skip jailed plans
-			if (plan.jailed == true) {
+					"Plan: " << plan.target.id << ", cornered: "
+							<< (plan.cornered == true));
+			// skip cornered plans
+			if (plan.cornered == true) {
 				continue;
 			}
-			double dist = distance(plan.target.centroid, jail);
+			double dist = distance(plan.target.centroid, corner);
 			ROS_DEBUG_STREAM(
 					"Distance for " << plan.target.id << " is " << dist);
 			if (dist < shortestDistance) {
@@ -239,28 +239,28 @@ ballCollectorRobot::Target ballPushingPlanner::createTarget(
 ballCollectorRobot::PushPlan ballPushingPlanner::createPushPlan(
 		ballCollectorRobot::Target target) {
 	ballCollectorRobot::PushPlan plan;
-	plan.jailed = false;
+	plan.cornered = false;
 	geometry_msgs::Pose start;
 	geometry_msgs::Point startpos;
 	geometry_msgs::Quaternion startOrientation;
 
 	// easy cases, where target is perfectly aligned
-	if (target.centroid.x == jail.x) {
+	if (target.centroid.x == corner.x) {
 		ROS_DEBUG_STREAM("Target Aligned Along X Axis");
 		startpos.x = target.centroid.x;
 		// shift by appropriate offset
-		if (target.centroid.y < jail.y) {
+		if (target.centroid.y < corner.y) {
 			startpos.y = target.centroid.y - offset;
 			setOrientation(startOrientation, 90);
 		} else {
 			startpos.y = target.centroid.y + offset;
 			setOrientation(startOrientation, 270);
 		}
-	} else if (target.centroid.y == jail.y) {
+	} else if (target.centroid.y == corner.y) {
 		ROS_DEBUG_STREAM("Target Aligned Along Y Axis");
 		startpos.y = target.centroid.y;
 		// shift by appropriate offset
-		if (target.centroid.x < jail.x) {
+		if (target.centroid.x < corner.x) {
 			startpos.x = target.centroid.x - offset;
 			setOrientation(startOrientation, 0);
 		} else {
@@ -269,24 +269,24 @@ ballCollectorRobot::PushPlan ballPushingPlanner::createPushPlan(
 		}
 	} else {
 		// harder case
-		// angle from target to jail centroid
+		// angle from target to corner centroid
 		double angle = M_PI
-				* atan2(jail.y - target.centroid.y, jail.x - target.centroid.x)
-				/ 180.0;
+				* atan2(corner.y - target.centroid.y,
+						corner.x - target.centroid.x) / 180.0;
 		setOrientation(startOrientation, 180);
 		ROS_DEBUG_STREAM(
 				"Target at (" << target.centroid.x << ", " << target.centroid.y
 						<< ")");
-		ROS_DEBUG_STREAM("Angle from Jail: " << angle);
+		ROS_DEBUG_STREAM("Angle from corner: " << angle);
 	}
 	start.position = startpos;
 	start.orientation = startOrientation;
 
 	geometry_msgs::Pose goal;
 	geometry_msgs::Point goalpos;
-	goalpos.x = jail.x;
-	goalpos.y = jail.y;
-	goalpos.z = jail.z;
+	goalpos.x = corner.x;
+	goalpos.y = corner.y;
+	goalpos.z = corner.z;
 	goal.position = goalpos;
 
 	plan.start = start;
