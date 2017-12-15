@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="ball_collector_robot" name="ball_pushing_planner" type="ball_pushing_planner" output="screen"/>
+  <test pkg="ball_collector_robot" test-name="ball_pushing_planner_test" type="ball_pushing_planner_tests" />
+</launch>

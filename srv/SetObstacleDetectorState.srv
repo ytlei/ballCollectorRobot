@@ -1,0 +1,6 @@
+uint8 INACTIVE = 0
+uint8 ACTIVE  = 1
+
+# avoiding obstacles or not
+uint8 state
+---

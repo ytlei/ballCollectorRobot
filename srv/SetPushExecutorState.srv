@@ -1,0 +1,15 @@
+uint8 STOPPED = 0
+uint8 READY  = 1
+uint8 MOVING  = 2
+uint8 PUSHING  = 3
+uint8 DEBUG  = 4
+
+# what are we doing now?
+uint8 state
+
+---
+
+uint8 OK    = 0
+uint8 ERROR = 1
+
+uint8 result

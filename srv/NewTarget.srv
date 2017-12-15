@@ -1,0 +1,7 @@
+geometry_msgs/Point centroid
+
+---
+
+# a new Target, unless the centroid occupies the location of another
+# target, the that target is returned instead
+Target target
