@@ -29,8 +29,10 @@
  */
 #include "ros/ros.h"
 #include <math.h>
-#include "BallCollector.hpp"
-
+#include "ball_collector.hpp"
+#include "ball_collector_robot/SetPushExecutorState.h"
+#include "ball_collector_robot/SetObstacleDetectorState.h"
+#include "ball_collector_robot/UpdateTarget.h"
 
 geometry_msgs::Twist zero_twist() {
   geometry_msgs::Twist vel;

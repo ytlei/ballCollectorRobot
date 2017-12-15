@@ -1,7 +1,7 @@
 uint8 MOVED=0
 uint8 JAILED=1
 
-clutter_butter/Target target
+ball_collector_robot/Target target
 
 uint8 action
 ---

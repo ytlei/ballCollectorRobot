@@ -5,7 +5,7 @@
  *      Author: ytlei
  */
 
-#include "odomTracker.hpp"
+#include "odom_tracker.hpp"
 #include "ros/ros.h"
 #include <math.h>
 
@@ -20,7 +20,7 @@ double quaternionToZAngle(const geometry_msgs::Quaternion &q) {
 	return yaw * 180.0 / M_PI;
 }
 
-odomTracker::odomTracker(ros::NodeHandle nh) {
+OdomTracker::OdomTracker(ros::NodeHandle nh) {
 	n = nh;
 	// Register our services with the master.
 	getOdomService = n.advertiseService("get_odom", &OdomTracker::getOdom,
@@ -30,11 +30,11 @@ odomTracker::odomTracker(ros::NodeHandle nh) {
 	odomSubscriber = n.subscribe("odom", 10, &OdomTracker::handleOdom, this);
 }
 
-odomTracker::~odomTracker() {
+OdomTracker::~OdomTracker() {
 	// nothing to do
 }
 
-void odomTracker::spin() {
+void OdomTracker::spin() {
 	ROS_INFO_STREAM("Starting Odom Tracker ...");
 	ros::Rate loop_rate(10);
 	while (ros::ok()) {
@@ -44,14 +44,14 @@ void odomTracker::spin() {
 	}
 }
 
-bool odomTracker::getOdom(ball_collector_robot::GetOdom::Request &req,
+bool OdomTracker::getOdom(ball_collector_robot::GetOdom::Request &req,
 		ball_collector_robot::GetOdom::Response &resp) {
 	(void) req;  // Suppress unused warning
 	resp.pose = location;
 	return true;
 }
 
-bool odomTracker::getOdomPretty(
+bool OdomTracker::getOdomPretty(
 		ball_collector_robot::GetOdomPretty::Request &req,
 		ball_collector_robot::GetOdomPretty::Response &resp) {
 	(void) req;  // Suppress unused warning
@@ -60,7 +60,7 @@ bool odomTracker::getOdomPretty(
 	return true;
 }
 
-void odomTracker::handleOdom(nav_msgs::Odometry odom) {
+void OdomTracker::handleOdom(nav_msgs::Odometry odom) {
 	ROS_DEBUG_STREAM(
 			"New Odom At: \n(" << odom.pose.pose.orientation.x << ", "
 					<< odom.pose.pose.orientation.y << ")");

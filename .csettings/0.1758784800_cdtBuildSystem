@@ -17,6 +17,9 @@
 							<listOptionValue builtIn="false" value="/usr/lib/gcc/x86_64-linux-gnu/6.0.0"/>
 							<listOptionValue builtIn="false" value="/usr/include"/>
 							<listOptionValue builtIn="false" value="/opt/ros/kinetic/include"/>
+							<listOptionValue builtIn="false" value="/usr/include/c++/5.4.0"/>
+							<listOptionValue builtIn="false" value="/usr/include/c++/5.4.0/backward"/>
+							<listOptionValue builtIn="false" value="/home/ytlei/catkin_ws/src/ball_collector_robot/include"/>
 						</option>
 						<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2048983056" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 					</tool>

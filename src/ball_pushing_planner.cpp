@@ -58,8 +58,7 @@ ballPushingPlanner::ballPushingPlanner(ros::NodeHandle nh) {
 		minimumDistance = offset_dist;
 	}
 	ROS_INFO_STREAM(
-			"corner Coordinates: (" << corner.x << "," << corner.y << ","
-					<< corner.z << ")");
+			"corner Coordinates: (" << corner.x << "," << corner.y << "," << corner.z << ")");
 }
 
 ballPushingPlanner::~ballPushingPlanner() {
@@ -89,23 +88,19 @@ void ballPushingPlanner::spin() {
 bool ballPushingPlanner::addTarget(ballCollectorRobot::NewTargetRequest &req,
 		ballCollectorRobot::NewTargetResponse &resp) {
 	ROS_INFO_STREAM(
-			"Request to add target at centroid: (" << req.centroid.x << ", "
-					<< req.centroid.y << ")");
+			"Request to add target at centroid: (" << req.centroid.x << ", " << req.centroid.y << ")");
 	// is it already in corner?
 	double dist = distance(req.centroid, corner);
 	if (dist < minimumDistance) {
 		ROS_WARN_STREAM(
-				"Target at (" << req.centroid.x << ", " << req.centroid.y
-						<< ") " << dist << " from corner, min dist is "
-						<< minimumDistance);
+				"Target at (" << req.centroid.x << ", " << req.centroid.y << ") " << dist << " from corner, min dist is " << minimumDistance);
 		return false;
 	}
 	// is it already known?
 	int targetId = targetExists(req.centroid);
 	if (targetId != -1) {
 		ROS_DEBUG_STREAM(
-				"Target at centroid: (" << req.centroid.x << ", "
-						<< req.centroid.y << ") already exists");
+				"Target at centroid: (" << req.centroid.x << ", " << req.centroid.y << ") already exists");
 		ballCollectorRobot::Target target = getTarget(targetId);
 		resp.target = target;
 	} else {
@@ -125,8 +120,7 @@ bool ballPushingPlanner::updateTarget(
 			ballCollectorRobot::PushPlan &plan = *it;
 			if (plan.target.id == req.target.id) {
 				ROS_INFO_STREAM(
-						"Setting Target with ID: " << plan.target.id
-								<< " To cornerED");
+						"Setting Target with ID: " << plan.target.id << " To cornerED");
 				plan.cornered = true;
 				break;
 			}
@@ -159,8 +153,7 @@ bool ballPushingPlanner::getPushPlan(
 		double shortestDistance = 1000000;
 		for (ballCollectorRobot::PushPlan plan : plans) {
 			ROS_INFO_STREAM(
-					"Plan: " << plan.target.id << ", cornered: "
-							<< (plan.cornered == true));
+					"Plan: " << plan.target.id << ", cornered: " << (plan.cornered == true));
 			// skip cornered plans
 			if (plan.cornered == true) {
 				continue;
@@ -202,9 +195,7 @@ int ballPushingPlanner::targetExists(geometry_msgs::Point centroid) {
 		ROS_DEBUG_STREAM("Distance to target: " << dist);
 		if (dist <= minimumDistance) {
 			ROS_DEBUG_STREAM(
-					"Target with id" << plan.target.id
-							<< " less that minimum distance of "
-							<< minimumDistance);
+					"Target with id" << plan.target.id << " less that minimum distance of " << minimumDistance);
 			return plan.target.id;
 		}
 	}
@@ -275,8 +266,7 @@ ballCollectorRobot::PushPlan ballPushingPlanner::createPushPlan(
 						corner.x - target.centroid.x) / 180.0;
 		setOrientation(startOrientation, 180);
 		ROS_DEBUG_STREAM(
-				"Target at (" << target.centroid.x << ", " << target.centroid.y
-						<< ")");
+				"Target at (" << target.centroid.x << ", " << target.centroid.y << ")");
 		ROS_DEBUG_STREAM("Angle from corner: " << angle);
 	}
 	start.position = startpos;

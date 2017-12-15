@@ -5,16 +5,17 @@
  *      Author: ytlei
  */
 
-#ifndef ODOMTRACKER_HPP_
-#define ODOMTRACKER_HPP_
+#ifndef ODOM_TRACKER_HPP_
+#define ODOM_TRACKER_HPP_
 
+#include "ros/ros.h"
 #include <vector>
 #include <geometry_msgs/Pose.h>
 #include <nav_msgs/Odometry.h>
 #include "ball_collector_robot/GetOdom.h"
 #include "ball_collector_robot/GetOdomPretty.h"
 
-class odomTracker {
+class OdomTracker {
 private:
 	ros::NodeHandle n;
 	ros::ServiceServer getOdomService;

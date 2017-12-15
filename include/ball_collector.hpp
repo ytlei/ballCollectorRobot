@@ -1,7 +1,7 @@
 /**
  * @file
  * @author Yiting Lei <ytlei@umd.edu>
- * @brief header file for ballCollector
+ * @brief header file for ball_collector
  * @copyright BSD License
  * Copyright (c) 2017 Yiting Lei
  * All rights reserved.
@@ -27,8 +27,22 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
-#ifndef SRC_BALLCOLLECTOR_HPP_
-#define SRC_BALLCOLLECTOR_HPP_
+
+#ifndef BALL_COLLECTOR_HPP_
+#define BALL_COLLECTOR_HPP_
+
+#include <vector>
+#include <sensor_msgs/LaserScan.h>
+#include <geometry_msgs/Pose.h>
+#include <nav_msgs/Odometry.h>
+#include "ball_collector_robot/Target.h"
+#include "ball_collector_robot/GetPushPlan.h"
+#include "ball_collector_robot/UpdateTarget.h"
+#include "ball_collector_robot/SetPushExecutorState.h"
+#include "ball_collector_robot/GoTo.h"
+#include "ball_collector_robot/Orient.h"
+#include "ball_collector_robot/GetOdom.h"
+
 
 class BallCollector {
 private:

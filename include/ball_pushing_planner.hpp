@@ -31,6 +31,7 @@
 #ifndef BALL_PUSHING_PLANNER_H_
 #define BALL_PUSHING_PLANNER_H_
 
+#include "ros/ros.h"
 #include <vector>
 #include <sensor_msgs/LaserScan.h>
 #include <geometry_msgs/Point.h>
@@ -50,7 +51,7 @@ private:
 	// subscriber for Target push updates
 	ros::Subscriber sub;
 	// location of the Jail relative to the world frame
-	geometry_msgs::Point jail;
+	geometry_msgs::Point corner;
 	ros::ServiceServer addTargetService;
 	ros::ServiceServer updateTargetService;
 	ros::ServiceServer getPushPlanService;
