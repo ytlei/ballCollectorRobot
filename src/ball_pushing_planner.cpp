@@ -27,7 +27,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
-#include "../include/ballCollectorRobot/ballPushingPlanner.h"
+#include "ball_pushing_planner.hpp"
 
 #include "ros/ros.h"
 #include <math.h>
