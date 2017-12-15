@@ -58,7 +58,7 @@ private:
 	// publisher for velocity twist messages
 	ros::Publisher velocityPub;
 	// state
-	int mode = ball_collector_robot::SetBallCollectorState::Request::STOPPED;
+	int mode = ball_collector_robot::SetPushExecutorState::Request::STOPPED;
 
 	/**
 	 * Executes the given plan
@@ -71,7 +71,7 @@ private:
 	 * @angle to orient to
 	 * @return if move was successful
 	 */
-	bool goTo(geometry_msgs::Point goal, double angle);
+	bool goToCoordWithOrientation(geometry_msgs::Point goal, double angle);
 
 	/**
 	 * rotates the robot to the desire angle
@@ -117,8 +117,8 @@ public:
 	/**
 	 * Service for setting the push executor state
 	 */
-	bool setState(ball_collector_robot::SetBallCollectorStateRequest &req,
-			ball_collector_robot::SetBallCollectorStateResponse &resp);
+	bool setState(ball_collector_robot::SetPushExecutorStateRequest &req,
+			ball_collector_robot::SetPushExecutorStateResponse &resp);
 
 	/**
 	 * Service for go to service (debug mode only)
@@ -132,6 +132,6 @@ public:
 	bool orientServiceHandler(ball_collector_robot::OrientRequest &req,
 			ball_collector_robot::OrientResponse &resp);
 };
-};
+
 
 #endif /* SRC_BALLCOLLECTOR_HPP_ */

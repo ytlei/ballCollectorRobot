@@ -1,5 +1,5 @@
 # if in jail
-bool jailed
+bool cornered
 
 # where to start push from
 geometry_msgs/Pose start

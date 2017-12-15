@@ -71,9 +71,9 @@ void ballPushingPlanner::spin() {
 	while (ros::ok()) {
 		// any new targets to create plans for?
 		if (targets.size() > 0) {
-			ballCollectorRobot::Target end = targets.back();
+			ball_collector_robot::Target end = targets.back();
 			targets.pop_back();
-			ballCollectorRobot::PushPlan plan = createPushPlan(end);
+			ball_collector_robot::PushPlan plan = createPushPlan(end);
 			ROS_INFO_STREAM(
 					"Created plan for target with id: " << plan.target.id);
 			plans.push_back(plan);
@@ -85,8 +85,8 @@ void ballPushingPlanner::spin() {
 	}
 }
 
-bool ballPushingPlanner::addTarget(ballCollectorRobot::NewTargetRequest &req,
-		ballCollectorRobot::NewTargetResponse &resp) {
+bool ballPushingPlanner::addTarget(ball_collector_robot::NewTargetRequest &req,
+		ball_collector_robot::NewTargetResponse &resp) {
 	ROS_INFO_STREAM(
 			"Request to add target at centroid: (" << req.centroid.x << ", " << req.centroid.y << ")");
 	// is it already in corner?
@@ -101,23 +101,23 @@ bool ballPushingPlanner::addTarget(ballCollectorRobot::NewTargetRequest &req,
 	if (targetId != -1) {
 		ROS_DEBUG_STREAM(
 				"Target at centroid: (" << req.centroid.x << ", " << req.centroid.y << ") already exists");
-		ballCollectorRobot::Target target = getTarget(targetId);
+		ball_collector_robot::Target target = getTarget(targetId);
 		resp.target = target;
 	} else {
 		ROS_DEBUG_STREAM("Creating new target...");
-		ballCollectorRobot::Target target = createTarget(req.centroid);
+		ball_collector_robot::Target target = createTarget(req.centroid);
 		resp.target = target;
 	}
 	return true;
 }
 
 bool ballPushingPlanner::updateTarget(
-		ballCollectorRobot::UpdateTargetRequest &req,
-		ballCollectorRobot::UpdateTargetResponse &resp) {
-	if (req.action == ballCollectorRobot::UpdateTarget::Request::cornerED) {
-		for (std::vector<ballCollectorRobot::PushPlan>::iterator it =
+		ball_collector_robot::UpdateTargetRequest &req,
+		ball_collector_robot::UpdateTargetResponse &resp) {
+	if (req.action == ball_collector_robot::UpdateTarget::Request::CORNERED) {
+		for (std::vector<ball_collector_robot::PushPlan>::iterator it =
 				plans.begin(); it != plans.end(); ++it) {
-			ballCollectorRobot::PushPlan &plan = *it;
+			ball_collector_robot::PushPlan &plan = *it;
 			if (plan.target.id == req.target.id) {
 				ROS_INFO_STREAM(
 						"Setting Target with ID: " << plan.target.id << " To cornerED");
@@ -133,8 +133,8 @@ bool ballPushingPlanner::updateTarget(
 	return true;
 }
 
-ballCollectorRobot::PushPlan ballPushingPlanner::getPushPlanForTarget(int id) {
-	for (ballCollectorRobot::PushPlan plan : plans) {
+ball_collector_robot::PushPlan ballPushingPlanner::getPushPlanForTarget(int id) {
+	for (ball_collector_robot::PushPlan plan : plans) {
 		if (plan.target.id == id) {
 			return plan;
 		}
@@ -145,13 +145,13 @@ ballCollectorRobot::PushPlan ballPushingPlanner::getPushPlanForTarget(int id) {
 }
 
 bool ballPushingPlanner::getPushPlan(
-		ballCollectorRobot::GetPushPlanRequest &req,
-		ballCollectorRobot::GetPushPlanResponse &resp) {
+		ball_collector_robot::GetPushPlanRequest &req,
+		ball_collector_robot::GetPushPlanResponse &resp) {
 	(void) req;  // Suppress unused warning
 	if (plans.size() > 0) {
 		int id = plans.front().target.id;
 		double shortestDistance = 1000000;
-		for (ballCollectorRobot::PushPlan plan : plans) {
+		for (ball_collector_robot::PushPlan plan : plans) {
 			ROS_INFO_STREAM(
 					"Plan: " << plan.target.id << ", cornered: " << (plan.cornered == true));
 			// skip cornered plans
@@ -178,8 +178,8 @@ bool ballPushingPlanner::getPushPlan(
 	}
 }
 
-bool ballPushingPlanner::clearAll(ballCollectorRobot::ClearAllRequest &req,
-		ballCollectorRobot::ClearAllResponse &resp) {
+bool ballPushingPlanner::clearAll(ball_collector_robot::ClearAllRequest &req,
+		ball_collector_robot::ClearAllResponse &resp) {
 	(void) req;  // Suppress unused warning
 	(void) resp;  // Suppress unused warning
 	targets.clear();
@@ -189,7 +189,7 @@ bool ballPushingPlanner::clearAll(ballCollectorRobot::ClearAllRequest &req,
 }
 
 int ballPushingPlanner::targetExists(geometry_msgs::Point centroid) {
-	for (ballCollectorRobot::PushPlan plan : plans) {
+	for (ball_collector_robot::PushPlan plan : plans) {
 		// better way to do this?
 		double dist = distance(plan.target.centroid, centroid);
 		ROS_DEBUG_STREAM("Distance to target: " << dist);
@@ -202,8 +202,8 @@ int ballPushingPlanner::targetExists(geometry_msgs::Point centroid) {
 	return -1;
 }
 
-ballCollectorRobot::Target ballPushingPlanner::getTarget(int targetId) {
-	for (ballCollectorRobot::Target t : targets) {
+ball_collector_robot::Target ballPushingPlanner::getTarget(int targetId) {
+	for (ball_collector_robot::Target t : targets) {
 		if (t.id == targetId) {
 			return t;
 		}
@@ -213,9 +213,9 @@ ballCollectorRobot::Target ballPushingPlanner::getTarget(int targetId) {
 	throw std::domain_error("invalid target id");
 }
 
-ballCollectorRobot::Target ballPushingPlanner::createTarget(
+ball_collector_robot::Target ballPushingPlanner::createTarget(
 		geometry_msgs::Point centroid) {
-	ballCollectorRobot::Target t;
+	ball_collector_robot::Target t;
 	geometry_msgs::Point c;
 	c.x = centroid.x;
 	c.y = centroid.y;
@@ -227,9 +227,9 @@ ballCollectorRobot::Target ballPushingPlanner::createTarget(
 	return t;
 }
 
-ballCollectorRobot::PushPlan ballPushingPlanner::createPushPlan(
-		ballCollectorRobot::Target target) {
-	ballCollectorRobot::PushPlan plan;
+ball_collector_robot::PushPlan ballPushingPlanner::createPushPlan(
+		ball_collector_robot::Target target) {
+	ball_collector_robot::PushPlan plan;
 	plan.cornered = false;
 	geometry_msgs::Pose start;
 	geometry_msgs::Point startpos;

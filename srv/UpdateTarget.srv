@@ -1,5 +1,5 @@
 uint8 MOVED=0
-uint8 JAILED=1
+uint8 CORNERED=1
 
 ball_collector_robot/Target target
 

@@ -101,7 +101,7 @@ BallCollector::BallCollector(ros::NodeHandle nh) {
 	  updateTargetClient = n.serviceClient<ball_collector_robot::UpdateTarget>("update_target");
 	  getOdomClient = n.serviceClient<ball_collector_robot::GetOdom>("get_odom");
 	  velocityPub = n.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
-	  int defaultMode = ball_collector_robot::SetBallCollectorState::Request::STOPPED;
+	  int defaultMode = ball_collector_robot::SetPushExecutorState::Request::STOPPED;
 	  n.param<int>("start_mode", mode, defaultMode);
 	  ROS_INFO_STREAM("Starting in Mode: " << mode);
 
@@ -116,15 +116,15 @@ void BallCollector::spin() {
 
   while (ros::ok()) {
     // check plans to execute
-    if (mode == ball_collector_robot::SetBallCollectorState::Request::READY) {
-      mode = ball_collector_robot::SetBallCollectorState::Request::PUSHING;
+    if (mode == ball_collector_robot::SetPushExecutorState::Request::READY) {
+      mode = ball_collector_robot::SetPushExecutorState::Request::PUSHING;
       ROS_INFO_STREAM("Were active, time to push stuff...");
       ball_collector_robot::GetPushPlan getPushPlanService;
       bool hasPlan = getPushPlanClient.call(getPushPlanService);
       if (hasPlan) {
         executePlan(getPushPlanService.response.plan);
       }
-    } else if (mode == ball_collector_robot::SetBallCollectorState::Request::DEBUG) {  // debug
+    } else if (mode == ball_collector_robot::SetPushExecutorState::Request::DEBUG) {  // debug
       ROS_DEBUG_STREAM("Were now in debug mode...");
     }
     // keep alive
@@ -133,12 +133,12 @@ void BallCollector::spin() {
   }
 }
 
-bool BallCollector::setState(ball_collector_robot::SetBallCollectorStateRequest &req,
-                            ball_collector_robot::SetBallCollectorStateResponse &resp) {
+bool BallCollector::setState(ball_collector_robot::SetPushExecutorStateRequest &req,
+                            ball_collector_robot::SetPushExecutorStateResponse &resp) {
   mode = req.state;
   ROS_INFO_STREAM("Set state to: " << req.state);
   // is this useful?
-  resp.result = ball_collector_robot::SetBallCollectorStateResponse::OK;
+  resp.result = ball_collector_robot::SetPushExecutorStateResponse::OK;
   return true;
 }
 
@@ -158,7 +158,7 @@ bool BallCollector::orientServiceHandler(ball_collector_robot::OrientRequest &re
 
 void BallCollector::executePlan(ball_collector_robot::PushPlan plan) {
   // double check this is not already jailed
-  if (plan.jailed) {
+  if (plan.cornered) {
     ROS_WARN_STREAM("Plan for target with id: " << plan.target.id << " already in corner, skipping!");
     return;
   }
@@ -197,11 +197,11 @@ void BallCollector::executePlan(ball_collector_robot::PushPlan plan) {
   // tell the planner this one is done
   ball_collector_robot::UpdateTarget updateTargetService;
   updateTargetService.request.target.id = plan.target.id;
-  updateTargetService.request.action = ball_collector_robot::UpdateTarget::Request::JAILED;
+  updateTargetService.request.action = ball_collector_robot::UpdateTarget::Request::CORNERED;
   updateTargetClient.call(updateTargetService);
 
   ROS_INFO_STREAM("DONE PUSHING");
-  mode = ball_collector_robot::SetBallCollectorState::Request::READY;
+  mode = ball_collector_robot::SetPushExecutorState::Request::READY;
 }
 
 bool BallCollector::goToCoordWithOrientation(geometry_msgs::Point goal, double desiredAngle) {

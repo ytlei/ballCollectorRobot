@@ -77,7 +77,7 @@ void OdomTracker::handleOdom(nav_msgs::Odometry odom) {
 int main(int argc, char **argv) {
 	ros::init(argc, argv, "odom_tracker");
 	ros::NodeHandle n;
-	odomTracker odom_tracker(n);
+	OdomTracker odom_tracker(n);
 	odom_tracker.spin();
 	return 0;
 }
