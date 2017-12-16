@@ -48,6 +48,10 @@ roslaunch ball_collector_robot launch_world_test.launch.xml include_gazebo:=1
 demo/demo.sh 
 ```
 
+# demo video:
+
+https://youtu.be/6DqFTlv8eng
+
 ## Doxygen Documentation
 
 To generate the doxygen documentation from the root directory:
