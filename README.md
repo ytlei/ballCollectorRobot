@@ -63,6 +63,7 @@ doxygen doxygen.config
 This will create the documentation in the docs directory.
 
 ## TODO
-
+fix the offset issue
+add automatic navigation with random ball placement
 ## License
 MIT open-source license, see LICENSE.TXT
