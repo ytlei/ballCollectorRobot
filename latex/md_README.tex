@@ -1,0 +1,76 @@
+Ball Collector Robot project
+
+\subsection*{Overview}
+
+build a simulation of the ball collector robot on R\+OS. It will be built with turtlebot robot in R\+OS. The ball collector robot can find the nearest ball and goes to the ball and push them back to the corner for users to collect easily.
+
+The Robot\+: Use turtlebot as a foundation and use the sensor on it to see the environment and objects. After Acquiring the object, generate a path using navigation technique to collecting the ball. The environment\+: create a simulated tennis court with balls placed randomly and with walls on four sides. Tools may include Gazebo Simulator, Turtlebot module, and R\+OS.
+
+\subsection*{Author}
+
+Yi-\/ting Lei U\+MD Masters student in Robotics
+
+\subsection*{Link to Backlog Sheet}
+
+\href{https://docs.google.com/a/umd.edu/spreadsheets/d/1lzo7GK30SF71DnFegieKbuoOMx1Z_jcZFoYa5Z1Lw1A/edit?usp=sharing}{\tt Product backlog}
+
+\subsection*{Dependencies}
+
+
+\begin{DoxyItemize}
+\item R\+OS Kinetic
+\item navigation modules
+\item gazebo turtlebot packages
+\item geometry modules
+\item google test for unit tests
+\end{DoxyItemize}
+
+\subsection*{Building}
+
+
+\begin{DoxyCode}
+1 # into catkin workspace src/ folder
+2 git clone https://github.com/ytlei/ballCollectorRobot.git
+3 
+4 # from catkin workspace root
+5 catkin\_make 
+\end{DoxyCode}
+
+
+\subsection*{Issues}
+
+Due to some delay with simulation problems, the explore navigation function was not built yet. It can only run with predefined ball locations.
+
+\subsection*{Demo}
+
+
+\begin{DoxyCode}
+1 # this will launch gazebo, and the core nodes
+2 roslaunch ball\_collector\_robot launch\_world\_test.launch.xml include\_gazebo:=1
+3 
+4 # in a separate terminal
+5 demo/demo.sh 
+\end{DoxyCode}
+
+
+\section*{demo video\+:}
+
+\href{https://youtu.be/6DqFTlv8eng}{\tt https\+://youtu.\+be/6\+Dq\+F\+Tlv8eng}
+
+\subsection*{Doxygen Documentation}
+
+To generate the doxygen documentation from the root directory\+:
+
+
+\begin{DoxyCode}
+1 doxygen doxygen.config
+\end{DoxyCode}
+
+
+This will create the documentation in the docs directory.
+
+\subsection*{T\+O\+DO}
+
+\subsection*{License}
+
+M\+IT open-\/source license, see L\+I\+C\+E\+N\+S\+E.\+T\+XT 
