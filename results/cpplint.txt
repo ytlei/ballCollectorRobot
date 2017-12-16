@@ -1,0 +1,10 @@
+src/ball_collector.cpp:31:  Found C system header after other header. Should be: ball_collector.h, c system, c++ system, other.  [build/include_order] [4]
+src/ball_collector.cpp:67:  Is this a non-const reference? If so, make const or use a pointer: geometry_msgs::Quaternion &q  [runtime/references] [2]
+Done processing src/ball_collector.cpp
+src/ball_pushing_planner.cpp:33:  Found C system header after other header. Should be: ball_pushing_planner.h, c system, c++ system, other.  [build/include_order] [4]
+src/ball_pushing_planner.cpp:34:  Found C++ system header after other header. Should be: ball_pushing_planner.h, c system, c++ system, other.  [build/include_order] [4]
+src/ball_pushing_planner.cpp:35:  Found C++ system header after other header. Should be: ball_pushing_planner.h, c system, c++ system, other.  [build/include_order] [4]
+Done processing src/ball_pushing_planner.cpp
+src/odom_tracker.cpp:32:  Found C system header after other header. Should be: odom_tracker.h, c system, c++ system, other.  [build/include_order] [4]
+Done processing src/odom_tracker.cpp
+Total errors found: 6

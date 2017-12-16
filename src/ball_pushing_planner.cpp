@@ -46,12 +46,12 @@ ballPushingPlanner::ballPushingPlanner(ros::NodeHandle nh) {
 	clearAllService = n.advertiseService("clear_push_planner",
 			&ballPushingPlanner::clearAll, this);
 	// initialize corner
-	n.param<double>("corner_x", corner.x, 4.5);
-	n.param<double>("corner_y", corner.y, 4.5);
+	n.param<double>("corner_x", corner.x, 4.0);
+	n.param<double>("corner_y", corner.y, 4.0);
 	n.param<double>("corner_z", corner.z, 0.0);
 
 	// get initial offset
-	n.param<double>("offset", offset, 0.25);
+	n.param<double>("offset", offset, 0.35);
 	// set reasonable min dist
 	double offset_dist = sqrt(pow(offset, 2) + pow(offset, 2));
 	if (offset_dist < 2) {
@@ -126,8 +126,7 @@ bool ballPushingPlanner::updateTarget(
 			}
 		}
 	} else {
-		// they moved it
-		// TODO(bbuxton): figure this out
+
 	}
 	(void) resp;  // Suppress unused warning
 	return true;
@@ -264,7 +263,7 @@ ball_collector_robot::PushPlan ballPushingPlanner::createPushPlan(
 		double angle = M_PI
 				* atan2(corner.y - target.centroid.y,
 						corner.x - target.centroid.x) / 180.0;
-		setOrientation(startOrientation, 180);
+		setOrientation(startOrientation, angle);
 		ROS_DEBUG_STREAM(
 				"Target at (" << target.centroid.x << ", " << target.centroid.y << ")");
 		ROS_DEBUG_STREAM("Angle from corner: " << angle);
