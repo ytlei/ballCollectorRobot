@@ -2,16 +2,16 @@
   <world name='default'>
     <light name='sun' type='directional'>
       <cast_shadows>1</cast_shadows>
-      <pose frame=''>0 0 10 0 -0 0</pose>
+      <pose>0 0 10 0 -0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
-      <specular>0.1 0.1 0.1 1</specular>
+      <specular>0.2 0.2 0.2 1</specular>
       <attenuation>
         <range>1000</range>
         <constant>0.9</constant>
         <linear>0.01</linear>
         <quadratic>0.001</quadratic>
       </attenuation>
-      <direction>-0.5 0.5 -1</direction>
+      <direction>-0.5 0.1 -0.9</direction>
     </light>
     <model name='ground_plane'>
       <static>1</static>
@@ -29,14 +29,11 @@
                 <mu>100</mu>
                 <mu2>50</mu2>
               </ode>
-              <torsional>
-                <ode/>
-              </torsional>
             </friction>
+            <bounce/>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
           </surface>
           <max_contacts>10</max_contacts>
         </collision>
@@ -55,6 +52,10 @@
             </script>
           </material>
         </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
         <gravity>1</gravity>
@@ -81,32 +82,29 @@
     <model name='grey_wall'>
       <static>1</static>
       <link name='link'>
-        <pose frame=''>0 0 1.4 0 -0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <collision name='collision'>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
           <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
           </surface>
         </collision>
         <visual name='visual'>
           <cast_shadows>0</cast_shadows>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <material>
@@ -117,41 +115,42 @@
             </script>
           </material>
         </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-      <pose frame=''>-3.88296 4.25326 0 0 -0 0</pose>
+      <pose>-2.53262 -5 0 0 -0 0</pose>
     </model>
     <model name='grey_wall_0'>
       <static>1</static>
       <link name='link'>
-        <pose frame=''>0 0 1.4 0 -0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <collision name='collision'>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
           <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
           </surface>
         </collision>
         <visual name='visual'>
           <cast_shadows>0</cast_shadows>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <material>
@@ -162,41 +161,42 @@
             </script>
           </material>
         </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-      <pose frame=''>0.466314 4.2588 0 0 -0 0</pose>
+      <pose>-2.49784 -3 0 0 -0 0</pose>
     </model>
     <model name='grey_wall_1'>
       <static>1</static>
       <link name='link'>
-        <pose frame=''>0 0 1.4 0 -0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <collision name='collision'>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
           <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
           </surface>
         </collision>
         <visual name='visual'>
           <cast_shadows>0</cast_shadows>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <material>
@@ -207,86 +207,42 @@
             </script>
           </material>
         </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-      <pose frame=''>-2.86561 -2.89789 0 0 -0 0</pose>
-    </model>
-    <model name='grey_wall_2'>
-      <static>1</static>
-      <link name='link'>
-        <pose frame=''>0 0 1.4 0 -0 0</pose>
-        <collision name='collision'>
-          <geometry>
-            <box>
-              <size>7.5 0.2 2.8</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <box>
-              <size>7.5 0.2 2.8</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://grey_wall/materials/scripts</uri>
-              <uri>model://grey_wall/materials/textures</uri>
-              <name>vrc/grey_wall</name>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>1.4242 -5.04883 0 0 -0 0</pose>
+      <pose>-2.53835 -1 0 0 -0 0</pose>
     </model>
     <model name='grey_wall_3'>
       <static>1</static>
       <link name='link'>
-        <pose frame=''>0 0 1.4 0 -0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <collision name='collision'>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
           <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
           </surface>
         </collision>
         <visual name='visual'>
           <cast_shadows>0</cast_shadows>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <material>
@@ -297,41 +253,42 @@
             </script>
           </material>
         </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-      <pose frame=''>-7.92356 0.038635 0 0 -0 0</pose>
+      <pose>5 1 0 0 -0 0</pose>
     </model>
-    <model name='grey_wall_3_clone'>
+    <model name='grey_wall_4'>
       <static>1</static>
       <link name='link'>
-        <pose frame=''>0 0 1.4 0 -0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <collision name='collision'>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
           <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
           </surface>
         </collision>
         <visual name='visual'>
           <cast_shadows>0</cast_shadows>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <material>
@@ -342,41 +299,42 @@
             </script>
           </material>
         </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-      <pose frame=''>-9.09526 -2.18012 0 0 -0 1.55</pose>
+      <pose>-4.5188 -5 0 0 -0 0</pose>
     </model>
-    <model name='grey_wall_3_clone_0'>
+    <model name='grey_wall_6'>
       <static>1</static>
       <link name='link'>
-        <pose frame=''>0 0 1.4 0 -0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <collision name='collision'>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
           <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
           </surface>
         </collision>
         <visual name='visual'>
           <cast_shadows>0</cast_shadows>
           <geometry>
             <box>
-              <size>7.5 0.2 2.8</size>
+              <size>3 0.2 0.8</size>
             </box>
           </geometry>
           <material>
@@ -387,286 +345,215 @@
             </script>
           </material>
         </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-      <pose frame=''>5.7018 -2.07863 0 0 -0 1.5705</pose>
-    </model>
-    <model name='grey_wall_3_clone_1'>
-      <static>1</static>
-      <link name='link'>
-        <pose frame=''>0 0 1.4 0 -0 0</pose>
-        <collision name='collision'>
-          <geometry>
-            <box>
-              <size>7.5 0.2 2.8</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <box>
-              <size>7.5 0.2 2.8</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://grey_wall/materials/scripts</uri>
-              <uri>model://grey_wall/materials/textures</uri>
-              <name>vrc/grey_wall</name>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>5.71551 2.18254 0 0 -0 1.5705</pose>
-    </model>
-    <model name='unit_sphere_0'>
-      <pose frame=''>-5.4313 -0.826288 0.5 0 -0 0</pose>
-      <link name='link'>
-        <inertial>
-          <mass>0.1</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.1</iyy>
-            <iyz>0</iyz>
-            <izz>0.1</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.1</radius>
-            </sphere>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.1</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <script>
-              <name>Gazebo/yellow</name>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-    </model>
-    <model name='unit_sphere_1'>
-      <pose frame=''>-2.35741 1.04876 0.5 0 -0 0</pose>
-      <link name='link'>
-        <inertial>
-          <mass>0.1</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.1</iyy>
-            <iyz>0</iyz>
-            <izz>0.1</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.1</radius>
-            </sphere>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.1</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <script>
-              <name>Gazebo/yellow</name>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
+      <pose>3 4.52028 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>612 96000000</sim_time>
-      <real_time>614 124108699</real_time>
-      <wall_time>1513272724 804577531</wall_time>
-      <iterations>612096</iterations>
+      <sim_time>1527 439000000</sim_time>
+      <real_time>87 842186251</real_time>
+      <wall_time>1494203900 58152190</wall_time>
       <model name='grey_wall'>
-        <pose frame=''>-5 5 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
+        <pose>-1.72123 2.30712 0.4 0 -0 0</pose>
         <link name='link'>
-          <pose frame=''>-5 5 1.4 0 -0 0</pose>
+          <pose>-1.72123 2.30712 0.4 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='grey_wall_0'>
-        <pose frame=''>2 5 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
+        <pose>-1.63832 -0.63758 0.4 0 -0 0</pose>
         <link name='link'>
-          <pose frame=''>2 5 1.4 0 -0 0</pose>
+          <pose>-1.63832 -0.63758 0.4 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='grey_wall_1'>
-        <pose frame=''>-5 -5 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
+        <pose>-3.08152 0.859151 0.4 0 0 -1.53854</pose>
         <link name='link'>
-          <pose frame=''>-5 -5 1.4 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='grey_wall_2'>
-        <pose frame=''>2 -5 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>2 -5 1.4 0 -0 0</pose>
+          <pose>-3.08152 0.859151 0.4 0 0 -1.53854</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='grey_wall_3'>
-        <pose frame=''>-9 2 0 0 -0 1.5705</pose>
-        <scale>1 1 1</scale>
+        <pose>2.5426 0.828043 0.4 0 0 -1.57102</pose>
         <link name='link'>
-          <pose frame=''>-9 2 1.4 0 -0 1.5705</pose>
+          <pose>2.5426 0.828043 0.4 0 0 -1.57102</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='grey_wall_3_clone'>
-        <pose frame=''>-9 -2 0 0 -0 1.5705</pose>
-        <scale>1 1 1</scale>
+      <model name='grey_wall_4'>
+        <pose>1.14283 -0.636818 0.4 0 -0 0</pose>
         <link name='link'>
-          <pose frame=''>-9 -2 1.4 0 -0 1.5705</pose>
+          <pose>1.14283 -0.636818 0.4 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='grey_wall_3_clone_0'>
-        <pose frame=''>5 -2 0 0 -0 1.5705</pose>
-        <scale>1 1 1</scale>
+      <model name='grey_wall_6'>
+        <pose>1.15129 2.3095 0.4 0 -0 0</pose>
         <link name='link'>
-          <pose frame=''>5 -2 1.4 0 -0 1.5705</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='grey_wall_3_clone_1'>
-        <pose frame=''>5 2 0 0 -0 1.5705</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>5 2 1.4 0 -0 1.5705</pose>
+          <pose>1.15129 2.3095 0.4 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
+        <pose>0 0 0 0 -0 0</pose>
         <link name='link'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
+          <pose>0 0 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='unit_sphere_0'>
-        <pose frame=''>1 0 0.5 0 -0 0</pose>
-        <scale>1 1 1</scale>
+      <model name='toy_1'>
+        <pose>1.00005 0 0.100046 1e-06 0.000459 -7e-06</pose>
         <link name='link'>
-          <pose frame=''>1 0 0.5 0 -0 0</pose>
+          <pose>1.00005 0 0.100046 1e-06 0.000459 -7e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='unit_sphere_1'>
-        <pose frame=''>2 1 0.5 0 -0 0</pose>
-        <scale>1 1 1</scale>
+      <model name='toy_2'>
+        <pose>2 1 0 0 -0 0</pose>
         <link name='link'>
-          <pose frame=''>2 1 0.5 0 -0 0</pose>
+          <pose>2 1 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <light name='sun'>
-        <pose frame=''>0 0 10 0 -0 0</pose>
-      </light>
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>10.8854 17.989 14.6061 0 0.383878 -2.23735</pose>
+        <pose>-3.61507 -2.43256 4.51994 0 0.817796 0.876203</pose>
         <view_controller>orbit</view_controller>
-        <projection_type>perspective</projection_type>
       </camera>
     </gui>
+    <model name='toy_1'>
+      <pose>1 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.1</radius>
+            </sphere>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <sphere>
+              <radius>0.1</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Yellow</name>
+            </script>
+          </material>
+        </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <static>0</static>
+    </model>
+    <model name='toy_2'>
+      <pose>2 1 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.1</radius>
+            </sphere>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <sphere>
+              <radius>0.1</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Green</name>
+            </script>
+          </material>
+        </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <static>0</static>
+    </model>
   </world>
 </sdf>
